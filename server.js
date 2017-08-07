@@ -18,8 +18,14 @@ app.set('view engine', 'mustache')
 
 app.get('/', (req, res) => {
 
-  }
+  const placeholder = '_'
 
-  app.listen(3000, () => {
-    console.log('Listening level over level 3000!')
-  })
+  const hangman = (word, guess) => {
+      
+  }
+  res.render('home')
+})
+
+app.listen(3000, () => {
+  console.log('Listening level over level 3000!')
+})

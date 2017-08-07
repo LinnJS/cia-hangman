@@ -4,6 +4,11 @@
   "private": true,
   "description": "Word guessing game",
   "main": "server.js",
+  "scripts": {
+    "start": "clear && node server.js",
+    "watch": "clear && nodemon --config nodemon.json server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "author": "Justin Linn",
   "license": "MIT",
   "devDependencies": {
@@ -12,6 +17,7 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
+    "express-session": "^1.15.5",
     "express-sessions": "^1.0.6",
     "express-validator": "^3.2.1",
     "mustache-express": "^1.2.5"
