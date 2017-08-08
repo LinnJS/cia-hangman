@@ -27,6 +27,9 @@ const mystery = word => {
   }).join('')
 }
 
+let gussesLeft = 8
+let lettersGuessed  = []
+
 app.get('/', (req, res) => {
   game = req.session
   let word = wordGen()
@@ -39,6 +42,9 @@ app.get('/', (req, res) => {
 app.post('/guess', (req, res) => {
   game = req.session
   game.guessedLetter = req.body.letter
+
+
+  lettersGuessed.push(req.body.guess)
   res.render('home', game)
 })
 
