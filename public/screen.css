@@ -1,3 +1,20 @@
 body {
-  background-color: blue;
+  margin: 1em 2em;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game {
+  margin: 6em 0;
+  text-align: center;
 }
