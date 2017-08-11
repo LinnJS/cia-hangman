@@ -16,17 +16,20 @@
     </div>
     <div class="flex">
       <div class="game">
-        <p>{{mysteryWord}}</p>
+        <span>{{message}}</span>
+        {{#mysteryWord}}
+          <span>{{.}}</span>
+        {{/mysteryWord}}
         <form action="/guess" method="post">
-        <input type="text" name="letter" placeholder="Guess a Letter">
-        <button type="submit" name="btn">Guess!</button>
-      </form>
-      <div class="guesses">
-        <p>Letters Guessed Correctly:</p>
-        <p>{{lettersGuessed}}</p>
-        <p>Letters Attempted:</p>
-        <p>{{lettersAttempted}}</p>
-      </div>
+          <input type="text" name="letter" placeholder="Guess a Letter">
+          <button type="submit" name="btn">Guess!</button>
+        </form>
+        <div class="guesses">
+          <span>Letters Guessed:</span>
+          {{#lettersGuessed}}
+            <span>{{.}}</span>
+          {{/lettersGuessed}}
+        </div>
       </div>
     </div>
   </body>

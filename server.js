@@ -21,29 +21,47 @@ let wordGen = function() {
   return words[i]
 }
 
-const mystery = word => {
-  return word.split('').map(letter => {
-    return (letter = '  ___  ')
-  }).join('')
-}
-
-let gussesLeft = 8
-let lettersGuessed = []
-let word = wordGen()
-game.mysteryWord = mystery(word)
-
 app.get('/', (req, res) => {
   game = req.session
-  game.gameWord = word
-  console.log(req.session.gameWord)
+  if (!game.word) {
+    game.word = wordGen()
+    game.guessesLeft = 8
+    game.lettersGuessed = []
+    game.mysteryWord = Array(game.word.length).fill('_')
+  }
+  console.log('WORD: ' + req.session.word)
   res.render('home', game)
 })
 
 app.post('/guess', (req, res) => {
-  game = req.session
-  game.guessedLetter = req.body.letter
-  lettersGuessed.push(game.guessedLetter)
-  console.log(lettersGuessed)
+  const game = req.session
+  let guessedLetter = req.body.letter
+  if (game.lettersGuessed.includes(guessedLetter)) {
+    game.message = `Already guessed "${guessedLetter}", try another letter.`
+    console.log(game.message)
+  } else {
+    game.lettersGuessed.push(guessedLetter)
+  }
+  game.mysteryWord = game.word.split('').map((letter) => {
+    if (game.lettersGuessed.includes(letter)) {
+      return letter
+    } else {
+      return ' _ '
+    }
+  })
+  console.log(game.mysteryWord, guessedLetter)
+
+  if (game.mysteryWord.join('') === game.word) {
+    res.render('win', {word: game.word});
+    return;
+  }
+
+  if (game.geussesLeft === 0) {
+    res.render('lose', {word: word});
+    return;
+  }
+
+  console.log(game.lettersGuessed)
   res.redirect('/')
 })
 
