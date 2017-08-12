@@ -2,6 +2,19 @@ body {
   margin: 1em 2em;
 }
 
+.messageWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.message {
+  display: inline-block;
+  color: red ;
+  margin-top: 1em;
+  text-align: center;
+  border-radius: .2em;
+}
+
 .header {
   display: flex;
   flex-direction: row;

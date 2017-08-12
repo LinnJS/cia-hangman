@@ -16,6 +16,11 @@ app.engine('mustache', mustacheExpress())
 app.set('views', './views')
 app.set('view engine', 'mustache')
 
+app.on("error", (res, req) =>{
+  res.render("error")
+})
+
+
 let wordGen = function() {
   let i = Math.floor(Math.random() * words.length)
   return words[i]
@@ -32,14 +37,18 @@ app.get('/', (req, res) => {
   console.log('WORD: ' + req.session.word)
   res.render('home', game)
 })
-
+app.get("/guess", (req, res) => {
+  res.redirect('/')
+})
 app.post('/guess', (req, res) => {
   const game = req.session
   let guessedLetter = req.body.letter
+
   if (game.lettersGuessed.includes(guessedLetter)) {
-    game.message = `Already guessed "${guessedLetter}", try another letter.`
+    game.message = ` Already guessed "${guessedLetter}", try another letter. `
     console.log(game.message)
   } else {
+    game.message = " "
     game.lettersGuessed.push(guessedLetter)
   }
   game.mysteryWord = game.word.split('').map((letter) => {
@@ -51,17 +60,22 @@ app.post('/guess', (req, res) => {
   })
   console.log(game.mysteryWord, guessedLetter)
 
+  if (!game.mysteryWord.includes(guessedLetter) && !game.mysteryWord.includes(guessedLetter)) {
+    game.guessesLeft -= 1
+  }
+
   if (game.mysteryWord.join('') === game.word) {
     res.render('win', {word: game.word});
     return;
   }
 
-  if (game.geussesLeft === 0) {
+  if (game.guessesLeft === 0) {
     res.render('lose', {word: word});
     return;
   }
 
   console.log(game.lettersGuessed)
+  console.log(game.guessesLeft)
   res.redirect('/')
 })
 
