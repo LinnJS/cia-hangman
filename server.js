@@ -5,6 +5,7 @@ const expressSession = require('express-session')
 const expressValidator = require('express-validator')
 const fs = require('fs')
 const words = fs.readFileSync('/usr/share/dict/words', 'utf-8').toLowerCase().split('\n')
+const date = Date.now()
 
 const app = express()
 app.use(bodyParser.json())
@@ -69,7 +70,7 @@ app.post('/guess', (req, res) => {
     return;
   }
 
-  if (game.guessesLeft === 0) {
+  if (game.guessesLeft <= 0) {
     res.render('lose', {word: word});
     return;
   }
