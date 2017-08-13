@@ -45,7 +45,7 @@ app.post('/guess', (req, res) => {
   let guessedLetter = req.body.letter
 
   if (game.lettersGuessed.includes(guessedLetter)) {
-    game.message = ` Already guessed "${guessedLetter}", try another letter. `
+    game.message = ` ERROR DUPLICATE INPUT "${guessedLetter}"`
     console.log(game.message)
   } else {
     game.message = " "

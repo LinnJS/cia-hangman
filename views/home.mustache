@@ -5,18 +5,18 @@
     <link rel="stylesheet" href="screen.css">
     <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
     <meta charset="utf-8" lang="en">
-    <title>Hangman</title>
+    <title>/CIA/topSecret/</title>
   </head>
 
   <body>
 
     <div class="wrapper">
       <div class="header">
-        <h3>{{guessesLeft}} more tries before the system locks</h3>
-        <h3>and the alarm sounds</h3>
+        <h3>System locks after {{guessesLeft}} inputs</h3>
+        <h3>the alarms will sounds</h3>
       </div>
       <div class="messageWrapper">
-        <div class="message">
+        <div id="message">
           {{#message}}
             <span>{{.}}</span>
           {{/message}}
@@ -32,7 +32,7 @@
           {{/mysteryWord}}
           <form action="/guess" method="post">
             <input type="text" name="letter" placeholder="Guess a Letter">
-            <button type="submit" name="btn">Guess!</button>
+            <button type="submit" name="btn">enter</button>
           </form>
           <div class="guesses">
             <span>Letters Guessed:</span>
