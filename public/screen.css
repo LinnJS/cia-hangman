@@ -1,5 +1,24 @@
-body {
-  margin: 1em 2em;
+* {
+  color: white;
+  font-family: 'Special Elite', cursive;
+
+}
+
+
+html, body {
+  margin: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.wrapper {
+  padding-top: 2em;
+  background-image: url('topSecret.jpg');
+  background-position: center;
+  background-size:cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 120vh;
 }
 
 .messageWrapper {
@@ -9,16 +28,14 @@ body {
 
 .message {
   display: inline-block;
-  color: red ;
+  color: red;
   margin-top: 1em;
   text-align: center;
   border-radius: .2em;
 }
 
 .header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  text-align: center;
 }
 
 .flex {
@@ -28,6 +45,10 @@ body {
 }
 
 .game {
-  margin: 6em 0;
+  margin: 1em 0;
   text-align: center;
+}
+
+.guesses {
+  margin-top: 1em;
 }

@@ -3,41 +3,43 @@
 
   <head>
     <link rel="stylesheet" href="screen.css">
+    <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
     <meta charset="utf-8" lang="en">
     <title>Hangman</title>
   </head>
 
   <body>
 
-
-    <div class="header">
-      <h3>Hangman</h3>
-      <h3>{{guessesLeft}} Guesses Left</h3>
-    </div>
-    <div class="messageWrapper">
-    <div class="message">
-      {{#message}}
-      <span>{{.}}</span>
-      {{/message}}
-      {{^message}}
-      <span> </span>
-      {{/message}}
-    </div>
-  </div>
-    <div class="flex">
-      <div class="game">
-        {{#mysteryWord}}
-          <span>{{.}}</span>
-        {{/mysteryWord}}
-        <form action="/guess" method="post">
-          <input type="text" name="letter" placeholder="Guess a Letter">
-          <button type="submit" name="btn">Guess!</button>
-        </form>
-        <div class="guesses">
-          <span>Letters Guessed:</span>
-          {{#lettersGuessed}}
+    <div class="wrapper">
+      <div class="header">
+        <h3>{{guessesLeft}} more tries before the system locks</h3>
+        <h3>and the alarm sounds</h3>
+      </div>
+      <div class="messageWrapper">
+        <div class="message">
+          {{#message}}
             <span>{{.}}</span>
-          {{/lettersGuessed}}
+          {{/message}}
+          {{^message}}
+          <span> </span>
+          {{/message}}
+        </div>
+      </div>
+      <div class="flex">
+        <div class="game">
+          {{#mysteryWord}}
+            <span>{{.}}</span>
+          {{/mysteryWord}}
+          <form action="/guess" method="post">
+            <input type="text" name="letter" placeholder="Guess a Letter">
+            <button type="submit" name="btn">Guess!</button>
+          </form>
+          <div class="guesses">
+            <span>Letters Guessed:</span>
+            {{#lettersGuessed}}
+              <span>{{.}}</span>
+            {{/lettersGuessed}}
+          </div>
         </div>
       </div>
     </div>

@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
     game.word = wordGen()
     game.guessesLeft = 8
     game.lettersGuessed = []
-    game.mysteryWord = Array(game.word.length).fill('_')
+    game.mysteryWord = Array(game.word.length).fill('*')
   }
   console.log('WORD: ' + req.session.word)
   res.render('home', game)
@@ -55,7 +55,7 @@ app.post('/guess', (req, res) => {
     if (game.lettersGuessed.includes(letter)) {
       return letter
     } else {
-      return ' _ '
+      return ' * '
     }
   })
   console.log(game.mysteryWord, guessedLetter)
