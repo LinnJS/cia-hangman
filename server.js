@@ -5,7 +5,6 @@ const expressSession = require('express-session')
 const expressValidator = require('express-validator')
 const fs = require('fs')
 const words = fs.readFileSync('/usr/share/dict/words', 'utf-8').toLowerCase().split('\n')
-const date = Date.now()
 
 const app = express()
 app.use(bodyParser.json())
@@ -17,10 +16,9 @@ app.engine('mustache', mustacheExpress())
 app.set('views', './views')
 app.set('view engine', 'mustache')
 
-app.on("error", (res, req) =>{
+app.on("error", (res, req) => {
   res.render("error")
 })
-
 
 let wordGen = function() {
   let i = Math.floor(Math.random() * words.length)
@@ -29,7 +27,7 @@ let wordGen = function() {
 
 app.get('/', (req, res) => {
   game = req.session
-  if (!game.word) {
+  if (!game.word || game.guessesLeft <= 0) {
     game.word = wordGen()
     game.guessesLeft = 8
     game.lettersGuessed = []
@@ -44,6 +42,7 @@ app.get("/guess", (req, res) => {
 app.post('/guess', (req, res) => {
   const game = req.session
   let guessedLetter = req.body.letter
+    if (!game.word){  res.redirect('/')}
 
   if (game.lettersGuessed.includes(guessedLetter)) {
     game.message = ` ERROR DUPLICATE INPUT "${guessedLetter}"`
@@ -71,7 +70,7 @@ app.post('/guess', (req, res) => {
   }
 
   if (game.guessesLeft <= 0) {
-    res.render('lose', {word: word});
+    res.render('lose', {word: game.word});
     return;
   }
 
@@ -83,6 +82,3 @@ app.post('/guess', (req, res) => {
 app.listen(3000, () => {
   console.log('Listening level over level 3000!')
 })
-
-// Have gusses registered
-// Have guess right registered
